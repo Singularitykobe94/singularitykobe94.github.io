@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101827">
+  <meta name="description" content="ViralFikir: Reels, Shorts ve TikTok videoları için ücretsiz, yaratıcı içerik fikirleri keşfet, kopyala ve paylaş.">
+  <meta name="google-site-verification" content="LA6lypOA4QP1coutmCItjaz0smtYDXnAT82KkyGxj-M">
+  <meta name="google-adsense-account" content="ca-pub-3267649898603040">
+  <title>ViralFikir | Reels ve TikTok İçerik Fikirleri</title>
+  <style>
+    :root { color-scheme:dark; --bg:#101827; --panel:#1b2940; --panel2:#243550; --text:#f5f7ff; --muted:#c3cce0; --brand:#9867f7; --line:#405171; }
+    * {box-sizing:border-box}
+    html {scroll-behavior:smooth}
+    body {font-family:system-ui,-apple-system,"Segoe UI",Arial,sans-serif;background:var(--bg);color:var(--text);margin:0;line-height:1.55}
+    .wrap {max-width:850px;margin:auto;padding:0 17px}
+    header {text-align:center;padding:52px 17px 33px;background:radial-gradient(circle at 50% 0,#35265b 0,transparent 67%)}
+    .logo {font-size:clamp(2.4rem,8vw,3.3rem);font-weight:850;letter-spacing:-.05em;color:#bb9afa;margin:0}
+    .subtitle {color:var(--muted);max-width:530px;margin:10px auto 22px}
+    h2 {font-size:1.4rem;margin:28px 0 13px}
+    h3 {margin:0 0 7px;font-size:1.12rem}
+    p {margin:9px 0}
+    button {font:inherit;cursor:pointer;border:0;border-radius:12px;padding:12px 17px;font-weight:700;min-height:46px;touch-action:manipulation}
+    button:focus-visible, a:focus-visible {outline:3px solid #d8c6ff;outline-offset:3px}
+    .primary {background:var(--brand);color:white;box-shadow:0 5px 15px #0004}
+    .secondary {background:var(--panel2);color:white;border:1px solid #506586}
+    .hero-action {font-size:1.05rem;padding:14px 23px}
+    .card {background:var(--panel);border:1px solid #304462;border-radius:17px;padding:20px;margin:15px 0}
+    .small {color:var(--muted);font-size:.91rem}
+    .idea {font-size:1.17rem;font-weight:700;margin:12px 0 16px;min-height:35px}
+    .tag {display:inline-flex;border:1px solid #6b54a1;color:#d6c3ff;padding:4px 10px;border-radius:50px;font-size:.84rem;font-weight:700}
+    .actions {display:flex;flex-wrap:wrap;gap:9px;margin-top:14px}
+    .grid {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+    .category {display:block;text-align:left;width:100%;background:var(--panel);border:1px solid #354968;color:var(--text);padding:19px;border-radius:16px;box-shadow:none}
+    .category:active {transform:translateY(1px)}
+    .category[aria-pressed="true"] {border-color:#b991ff;background:#322b51;box-shadow:inset 0 0 0 1px #b991ff}
+    .category-title {font-weight:800;display:block;font-size:1.1rem}
+    .category-desc {color:var(--muted);display:block;font-size:.85rem;margin-top:5px;font-weight:400}
+    .tip {border-left:3px solid #ab85ff;padding-left:15px;color:var(--muted)}
+    footer {padding:20px 0 45px;text-align:center;color:var(--muted);font-size:.84rem}
+    .status {min-height:1.3em;font-size:.88rem;color:#cfb9ff;margin:8px 0 0}
+    @media(max-width:440px) {.grid {grid-template-columns:1fr}.card {padding:17px}header {padding-top:35px}}
+    @media(prefers-reduced-motion:reduce) {html {scroll-behavior:auto}}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <h1 class="logo">⚡ ViralFikir</h1>
+      <p class="subtitle">Instagram Reels, TikTok ve YouTube Shorts için yaratıcı video fikirleri. Ücretsiz, kolay ve eğlenceli!</p>
+      <button type="button" class="primary hero-action" id="randomButton">🎲 Rastgele Fikir Üret</button>
+    </div>
+  </header>
+  <main class="wrap">
+    <section aria-labelledby="idea-heading" id="fikir-alani">
+      <h2 id="idea-heading">✨ Senin video fikrin</h2>
+      <div class="card" aria-live="polite" aria-atomic="true">
+        <span class="tag" id="categoryLabel">Tüm kategoriler</span>
+        <p class="idea" id="ideaText">Bir kategoriye dokun veya rastgele fikir üret!</p>
+        <p class="small" id="ideaHint">Bir telefon kamerası ve biraz yaratıcılık yeterli.</p>
+        <div class="actions">
+          <button type="button" class="primary" id="newIdeaButton">🔄 Yeni Fikir</button>
+          <button type="button" class="secondary" id="copyButton">📋 Fikri Kopyala</button>
+          <button type="button" class="secondary" id="shareButton">📤 Paylaş</button>
+        </div>
+        <p class="status" id="status" role="status"></p>
+      </div>
+    </section>
+
+    <section aria-labelledby="category-heading">
+      <h2 id="category-heading">🔥 Kategorini Seç</h2>
+      <p class="small">Aşağıdaki kutuların hepsi çalışır. Birine dokun, o konuda fikir gelsin.</p>
+      <div class="grid" id="categories">
+        <button type="button" class="category" data-category="komedi" aria-pressed="false"><span class="category-title">😂 Komedi</span><span class="category-desc">Komik kısa videolar ve skeçler</span></button>
+        <button type="button" class="category" data-category="gunluk" aria-pressed="false"><span class="category-title">🎬 Günlük Yaşam</span><span class="category-desc">Vlog ve günlük hayat fikirleri</span></button>
+        <button type="button" class="category" data-category="tiktok" aria-pressed="false"><span class="category-title">📱 TikTok Fikirleri</span><span class="category-desc">Kısa format ve akım uyarlamaları</span></button>
+        <button type="button" class="category" data-category="spor" aria-pressed="false"><span class="category-title">⚽ Spor</span><span class="category-desc">Maç ve antrenman içerikleri</span></button>
+        <button type="button" class="category" data-category="ask" aria-pressed="false"><span class="category-title">❤️ Aşk ve İlişkiler</span><span class="category-desc">Eğlenceli çift içerikleri</span></button>
+        <button type="button" class="category" data-category="bilgi" aria-pressed="false"><span class="category-title">💡 Faydalı Bilgiler</span><span class="category-desc">İpuçları ve mini anlatımlar</span></button>
+      </div>
+    </section>
+
+    <section class="card" aria-labelledby="tips-heading">
+      <h2 id="tips-heading">🎯 Daha iyi video için 3 ipucu</h2>
+      <p class="tip"><strong>İlk 2 saniyede dikkat çek:</strong> Merak uyandıran bir soru veya sürpriz görüntü kullan.</p>
+      <p class="tip"><strong>Tek bir konu anlat:</strong> Bir videoda bir fikir, izleyicinin takip etmesini kolaylaştırır.</p>
+      <p class="tip"><strong>Sonunda soru sor:</strong> İzleyicilerin yorum yapmasını kolaylaştır.</p>
+    </section>
+
+    <section class="card" id="hakkimizda">
+      <h2>📌 Hakkımızda</h2>
+      <p>ViralFikir; Instagram Reels, TikTok ve YouTube Shorts için yaratıcı kısa video fikirlerini ücretsiz sunan bir ilham platformudur.</p>
+      <p>Bir kategori seçerek fikir bulabilir, sonuçları kopyalayabilir veya paylaşabilirsin. Öneriler ilham amaçlıdır; belirli bir izlenme veya kazanç garantisi vermez.</p>
+    </section>
+
+    <section class="card" id="gizlilik">
+      <h2>🔒 Gizlilik Politikası</h2>
+      <p>ViralFikir, ziyaretçilerin bu sayfada isim veya e-posta girmesini istemez. Fikir üretme işlemi cihazındaki tarayıcıda gerçekleşir; bu özellik için kullanıcı hesabı gerekmez.</p>
+      <p>Site GitHub Pages üzerinde barındırılır. Barındırma hizmeti, hizmetin işletilmesi ve güvenliği amacıyla teknik erişim verilerini işleyebilir.</p>
+      <p>Google AdSense onaylanıp reklamlar etkinleştirilirse Google ve reklam iş ortakları çerezler veya benzer teknolojiler kullanabilir. Reklam tercihleri <a href="https://myadcenter.google.com/" target="_blank" rel="noopener noreferrer" style="color:#d6c3ff">Google Reklam Merkezim</a> üzerinden yönetilebilir. Reklam hizmeti etkinleştiğinde bu bildirim gerektiği şekilde güncellenecektir.</p>
+      <p>Bu politikada siteye yeni hizmetler eklendikçe değişiklik yapılabilir.</p>
+    </section>
+  </main>
+  <footer class="wrap">© 2026 ViralFikir · Ücretsiz içerik ilhamı</footer>
+  <script>
+    'use strict';
+    const ideas = {
+      komedi: [
+        'Sabah alarmı çalınca kurduğun 5 bahaneyi tek videoda canlandır.',
+        'Bir şey satın almadan önceki hayalinle kutuyu açtıktan sonraki gerçeği karşılaştır.',
+        'Telefon şarjı %1 kalınca verdiğin abartılı tepkileri canlandır.',
+        'Misafir gelmeden 5 dakika önce evde yaşanan telaşı skeç yap.',
+        'Arkadaşın “5 dakikaya geliyorum” deyince geçen zamanı komik şekilde göster.',
+        'Bir fotoğraf çektirmek isteyen kişiyle sabırsız fotoğrafçıyı canlandır.',
+        'Annenin ve senin aynı mesajı bambaşka anlaman üzerine kısa skeç çek.',
+        'İlk maaş günü ile ay sonunu iki farklı karakterle karşılaştır.'
+      ],
+      gunluk: [
+        'Bir gününü sadece 10 kısa görüntüyle anlat.',
+        'Sabah rutinini hızlandırılmış videoya dönüştür.',
+        'Gün boyunca seni gülümseten 3 küçük şeyi paylaş.',
+        'Evde yaptığın basit bir yemeğin hazırlığını 20 saniyede göster.',
+        'Bir gün boyunca telefonsuz geçirdiğin anları kaydet.',
+        'Çalışma masanı veya odanı önce-sonra formatında düzenle.',
+        'Mahallendeki sevdiğin bir manzarayı farklı açılardan çek.',
+        'Hafta sonu 100 TL harcamadan yaptığın 3 etkinliği göster.'
+      ],
+      tiktok: [
+        'Aynı görüntüyü 3 farklı müzikle kurgulayıp havasını karşılaştır.',
+        '“Bunu kimse beklemiyordu” girişli sürpriz bir mini hikâye anlat.',
+        'Videonun başında sonucu gösterip nasıl yaptığını geriye sararak açıkla.',
+        'Sıradan bir nesneyi sinematik çekimlerle tanıt.',
+        '3 hızlı kıyafet veya mekân geçişiyle dönüşüm videosu hazırla.',
+        'Bir olayı önce birinci kişi gözünden, sonra dışarıdan göster.',
+        'İzleyicinin tahmin edeceği 3 saniyelik bir bilmece çek.',
+        'Kendi sesinle komik bir dış seslendirme denemesi yap.'
+      ],
+      spor: [
+        'Maç öncesi tahminini ve maç sonrası yorumunu iki kısa klipte birleştir.',
+        'En sevdiğin takımın formasını 3 yaratıcı geçişle göster.',
+        'Evde ekipmansız yapabildiğin 3 basit ısınma hareketini göster.',
+        'Bir futbol pozisyonunu arkadaşınla güvenli şekilde canlandır.',
+        'Futbol izlerken yaşanan 4 farklı taraftar tepkisini canlandır.',
+        'Bir antrenmandaki küçük ilerlemeni önce-sonra videosuyla göster.',
+        'Arkadaşlarınla en zor gol sevinci taklidini yapmaya çalış.',
+        'Bir spor terimini hiç bilmeyen birine 15 saniyede açıkla.'
+      ],
+      ask: [
+        'Birlikte verdiğiniz en komik alışveriş kararını iki açıdan canlandırın.',
+        'Çiftlerin mesajlaşma tarzlarını eğlenceli şekilde karşılaştır.',
+        '“Ben seçerim” ile “Sen seç” diyaloglarından kısa skeç yap.',
+        'Sevdiğin kişiye küçük bir teşekkür videosu hazırla.',
+        'Birlikte ilk çektiğiniz ve en son çektiğiniz fotoğrafı karşılaştır.',
+        'Aynı soruya iki kişinin verdiği farklı cevapları yan yana göster.',
+        'Ücretsiz yapılabilecek 3 romantik etkinliği sırala.',
+        'Bir ilişkinin en komik yanlış anlaşılmasını canlandır.'
+      ],
+      bilgi: [
+        'Telefonda çoğu kişinin bilmediği 3 kullanışlı ayarı anlat.',
+        'Günlük hayatta zaman kazandıran küçük bir yöntemi göster.',
+        'Sık kullanılan bir kelimenin şaşırtıcı kökenini araştırıp açıkla.',
+        'Ücretsiz kullanabileceğin 3 üretkenlik aracını tanıt.',
+        'Fotoğraf çekerken ışığı daha iyi kullanmanın 2 yolunu göster.',
+        'Daha anlaşılır video altyazısı hazırlamak için 3 ipucu paylaş.',
+        'Doğru sanılan bir bilgiyi güvenilir kaynakla kontrol edip anlat.',
+        'Yeni başlayanlar için kısa video çekim kontrol listesi hazırla.'
+      ]
+    };
+    const categoryNames = {komedi:'😂 Komedi',gunluk:'🎬 Günlük Yaşam',tiktok:'📱 TikTok Fikirleri',spor:'⚽ Spor',ask:'❤️ Aşk ve İlişkiler',bilgi:'💡 Faydalı Bilgiler'};
+    let activeCategory = null;
+    let currentIdea = '';
+    let previousIdea = '';
+    const ideaText = document.getElementById('ideaText');
+    const categoryLabel = document.getElementById('categoryLabel');
+    const status = document.getElementById('status');
+    const categoryButtons = [...document.querySelectorAll('[data-category]')];
+    function pickIdea() {
+      const source = activeCategory ? ideas[activeCategory] : Object.values(ideas).flat();
+      let next = source[Math.floor(Math.random() * source.length)];
+      if (source.length > 1 && next === previousIdea) {
+        const index = source.indexOf(next);
+        next = source[(index + 1 + Math.floor(Math.random() * (source.length - 1))) % source.length];
+      }
+      previousIdea = next;
+      currentIdea = next;
+      ideaText.textContent = next;
+      categoryLabel.textContent = activeCategory ? categoryNames[activeCategory] : '✨ Rastgele Fikir';
+      status.textContent = '';
+    }
+    function setCategory(category) {
+      activeCategory = category;
+      categoryButtons.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.category === category)));
+      pickIdea();
+      document.getElementById('fikir-alani').scrollIntoView({behavior: matchMedia('(prefers-reduced-motion:reduce)').matches ? 'instant' : 'smooth',block:'start'});
+    }
+    async function copyIdea() {
+      if (!currentIdea) pickIdea();
+      const copyText = currentIdea + '\n\nViralFikir: https://fatihhanpetek61-alt.github.io/';
+      try {
+        if (navigator.clipboard?.writeText) {
+          await navigator.clipboard.writeText(copyText);
+        } else {
+          const input = document.createElement('textarea');
+          input.value = copyText;input.style.position = 'fixed';input.style.opacity = '0';
+          document.body.appendChild(input);input.select();
+          const copied = document.execCommand('copy');input.remove();
+          if (!copied) throw new Error('Copy not supported');
+        }
+        status.textContent = '✅ Fikir kopyalandı!';
+      } catch (e) { status.textContent = 'Kopyalanamadı. Fikir yazısını basılı tutup kopyalayabilirsin.'; }
+    }
+    async function shareIdea() {
+      if (!currentIdea) pickIdea();
+      const message = currentIdea + '\n\nViralFikir: https://fatihhanpetek61-alt.github.io/';
+      if (navigator.share) {
+        try { await navigator.share({title:'ViralFikir video fikri',text:message}); } catch(e) { if(e.name !== 'AbortError') status.textContent='Paylaşım yapılamadı.'; }
+      } else {await copyIdea();status.textContent='📋 Paylaşmak için fikir kopyalandı.';}
+    }
+    document.getElementById('randomButton').addEventListener('click', () => {
+      activeCategory=null;
+      categoryButtons.forEach(b=>b.setAttribute('aria-pressed','false'));
+      pickIdea();
+      document.getElementById('fikir-alani').scrollIntoView({behavior:'smooth',block:'start'});
+    });
+    document.getElementById('newIdeaButton').addEventListener('click',pickIdea);
+    document.getElementById('copyButton').addEventListener('click',copyIdea);
+    document.getElementById('shareButton').addEventListener('click',shareIdea);
+    categoryButtons.forEach(button=>button.addEventListener('click',()=>setCategory(button.dataset.category)));
+    pickIdea();
+  </script>
+</body>
+</html>
