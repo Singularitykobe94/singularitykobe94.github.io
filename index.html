@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="google-site-verification" content="LA6lypOA4QP1coutmCItjaz0smtYDXnAT82KkyGxj-M">
+<meta name="google-adsense-account" content="ca-pub-3267649898603040">
+<title>ViralFikir | Reels ve TikTok Fikirleri</title>
+<style>
+body{font-family:Arial,sans-serif;background:#101827;color:white;margin:0;padding:20px}
+header{text-align:center;padding:35px 10px}
+h1{color:#a78bfa}
+.card{background:#202d42;padding:20px;border-radius:16px;margin:15px 0}
+button{background:#8b5cf6;color:white;border:0;padding:14px;border-radius:10px;font-size:16px;cursor:pointer}
+</style>
+</head>
+<body>
+<header>
+<h1>⚡ ViralFikir</h1>
+<p>Instagram Reels ve TikTok için yaratıcı video fikirleri</p>
+<button onclick="fikir()">Rastgele Fikir Üret</button>
+</header>
+
+<h2>🔥 Popüler İçerik Fikirleri</h2>
+
+<div id="sonuc" class="card">Butona bas, yeni fikrini keşfet!</div>
+
+<div class="card">
+<h3>😂 Komedi</h3>
+<p>Beklenti ve gerçek karşılaştırması yap.</p>
+</div>
+
+<div class="card">
+<h3>🎬 Günlük Yaşam</h3>
+<p>Bir gününü 20 saniyede anlat.</p>
+</div>
+
+<div class="card">
+<h3>📱 TikTok Trendi</h3>
+<p>Popüler bir akımı kendi tarzınla yorumla.</p>
+</div>
+
+<script>
+const fikirler=[
+"Önce ve sonra dönüşüm videosu çek.",
+"Komik bir günlük olayı canlandır.",
+"3 pratik telefon ipucu paylaş.",
+"Bir gününü 20 saniyede göster.",
+"Beklenti ve gerçek videosu hazırla."
+];
+function fikir(){
+document.getElementById("sonuc").textContent=
+fikirler[Math.floor(Math.random()*fikirler.length)];
+}
+</script>
+</body>
+</html>
